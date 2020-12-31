@@ -26,30 +26,35 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
+	//Add a customer
 	@PostMapping(value = "/customers")
 	public ResponseEntity<String> createCustomer(@Valid @RequestBody CustomerDTO customerDTO) throws CustomerException {
 		String response = customerService.createCustomer(customerDTO);
 		return ResponseEntity.ok(response);
 	}
 	
+	//Get customer details
 	@GetMapping(value = "/customers/{phoneNo}")
 	public ResponseEntity<CustomerDTO> getSpecificCustomer(@PathVariable("phoneNo") Long phoneNo) throws CustomerException {
 		CustomerDTO response = customerService.getSpecificCustomer(phoneNo);
 		return ResponseEntity.ok(response);
 	}
 	
+	//update balance amount
 	@PutMapping(value = "/customers/{phoneNo}")
-	public ResponseEntity<String> updateCustomerAddress(@PathVariable("phoneNo") Long phoneNo, @Valid @RequestBody UpdateDTO updateDTO) throws CustomerException {
+	public ResponseEntity<String> updateBalanceAmount(@PathVariable("phoneNo") Long phoneNo, @Valid @RequestBody UpdateDTO updateDTO) throws CustomerException {
 		String response = customerService.updateBalanceAmount(phoneNo, updateDTO);
 		return ResponseEntity.ok(response);
 	}
 	
+	//delete a customer details
 	@DeleteMapping(value = "/customers/{phoneNo}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable("phoneNo") Long phoneNo) throws CustomerException {
 		String response = customerService.deleteCustomer(phoneNo);
 		return ResponseEntity.ok(response);
 	}
 	
+	//customer login
 	@GetMapping(value = "/customers")
 	public ResponseEntity<String> authenticateUser(@Valid @RequestBody LoginDTO loginDTO) throws CustomerException {
 		String response = customerService.authenticateCustomer(loginDTO);
